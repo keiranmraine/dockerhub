@@ -58,8 +58,40 @@ RUN     cd /tmp/downloads/grass-1.1.6;./setup.sh /opt/wtsi-cgp
 RUN     curl -sL https://github.com/wrpearson/fasta36/archive/v36.3.8.tar.gz | tar xz
 RUN     cd /tmp/downloads/fasta36-36.3.8/src; make -f ../make/Makefile.linux64 install XDIR=/opt/wtsi-cgp/bin
 
+# BRASS deps
+RUN     echo 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list
+RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
+RUN     add-apt-repository -y ppa:marutter/rdev
+RUN     apt-get -yq update
+RUN     apt-get -yq upgrade
+RUN     apt-get -qy install python unzip libboost-dev libboost-iostreams-dev libpstreams-dev libglib2.0-dev
+RUN     apt-get -qy install r-base r-base-core r-cran-rcolorbrewer r-cran-gam r-cran-VGAM r-cran-stringr
+
+# BRASS Bioconductor packages not available via apt-get:
+RUN     wget https://www.bioconductor.org/packages/release/bioc/src/contrib/BiocGenerics_0.16.1.tar.gz \
+             https://cran.r-project.org/src/contrib/poweRlaw_0.50.0.tar.gz \
+             https://www.bioconductor.org/packages/release/bioc/src/contrib/S4Vectors_0.8.11.tar.gz \
+             https://www.bioconductor.org/packages/release/bioc/src/contrib/IRanges_2.4.6.tar.gz \
+             https://www.bioconductor.org/packages/release/bioc/src/contrib/GenomeInfoDb_1.6.3.tar.gz \
+             https://www.bioconductor.org/packages/release/bioc/src/contrib/zlibbioc_1.16.0.tar.gz \
+             https://www.bioconductor.org/packages/release/bioc/src/contrib/XVector_0.10.0.tar.gz \
+             https://www.bioconductor.org/packages/release/bioc/src/contrib/GenomicRanges_1.22.4.tar.gz \
+             https://www.bioconductor.org/packages/release/bioc/src/contrib/copynumber_1.10.0.tar.gz
+
+RUN     R CMD INSTALL BiocGenerics_0.16.1.tar.gz \
+                      poweRlaw_0.50.0.tar.gz \
+                      S4Vectors_0.8.11.tar.gz \
+                      IRanges_2.4.6.tar.gz \
+                      GenomeInfoDb_1.6.3.tar.gz \
+                      zlibbioc_1.16.0.tar.gz \
+                      XVector_0.10.0.tar.gz
+
+# GenomicRanges fails if in the middle of a bulk install
+RUN     R CMD INSTALL GenomicRanges_1.22.4.tar.gz \
+                      copynumber_1.10.0.tar.gz
+
 # BRASS
-RUN     curl -sL https://github.com/cancerit/BRASS/archive/v4.0.11.tar.gz | tar xz
-RUN     cd /tmp/downloads/BRASS-4.0.11; ./setup.sh /opt/wtsi-cgp
+RUN     curl -sL https://github.com/cancerit/BRASS/archive/v4.0.12.tar.gz | tar xz
+RUN     cd /tmp/downloads/BRASS-4.0.12; ./setup.sh /opt/wtsi-cgp
 
 RUN rm -rf /tmp/downloads
