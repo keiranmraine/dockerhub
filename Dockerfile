@@ -69,7 +69,7 @@ RUN     echo 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/
         apt-get clean
 
 # BRASS Bioconductor packages not available via apt-get:
-COPY    /tmp/downloads/bioconductor.R /tmp/downloads/bioconductor.R
+COPY    /tmp/downloads/bioconductor.R .
 RUN     Rscript /tmp/downloads/bioconductor.R && rm -f /tmp/downloads/bioconductor.R
 
 # BRASS
