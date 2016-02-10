@@ -39,8 +39,8 @@ RUN     curl -sSL https://github.com/cancerit/ascatNgs/archive/v1.5.2.tar.gz | t
         cd /tmp/downloads/ascatNgs-1.5.2 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # cgpCaVEManPostProcessing
-RUN     curl -sSL https://github.com/cancerit/cgpCaVEManPostProcessing/archive/v1.4.1.tar.gz | tar xz && \
-        cd /tmp/downloads/cgpCaVEManPostProcessing-1.4.1 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
+RUN     curl -sSL https://github.com/cancerit/cgpCaVEManPostProcessing/archive/1.5.1.tar.gz | tar xz && \
+        cd /tmp/downloads/cgpCaVEManPostProcessing-1.5.1 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # cgpCaVEManWrapper
 RUN     curl -sSL https://github.com/cancerit/cgpCaVEManWrapper/archive/1.9.0.tar.gz | tar xz && \
