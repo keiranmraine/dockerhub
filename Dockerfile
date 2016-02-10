@@ -10,8 +10,8 @@ USER    root
 
 RUN     mkdir /tmp/downloads
 
-RUN     apt-get -yq update
-RUN     apt-get -yq install build-essential autoconf software-properties-common python-software-properties \
+RUN     apt-get -myq update
+RUN     apt-get -myq install build-essential autoconf software-properties-common python-software-properties \
                             wget curl rsync nano zlib1g-dev libncurses5-dev libgd-dev \
                             libgd2-xpm-dev libexpat1-dev python unzip libboost-dev libboost-iostreams-dev \
                             libpstreams-dev libglib2.0-dev
@@ -62,13 +62,13 @@ RUN     cd /tmp/downloads/fasta36-36.3.8/src; make -f ../make/Makefile.linux64 i
 RUN     echo 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list
 RUN     apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9
 RUN     add-apt-repository -y ppa:marutter/rdev
-RUN     apt-get -yq update
-RUN     apt-get -yq upgrade
-RUN     apt-get -qy install python unzip libboost-dev libboost-iostreams-dev libpstreams-dev libglib2.0-dev
-RUN     apt-get -qy install r-base r-base-core r-cran-rcolorbrewer r-cran-gam r-cran-VGAM r-cran-stringr
+RUN     apt-get -myq update
+RUN     apt-get -myq upgrade
+RUN     apt-get -mqy install python unzip libboost-dev libboost-iostreams-dev libpstreams-dev libglib2.0-dev
+RUN     apt-get -mqy install r-base r-base-core r-cran-rcolorbrewer r-cran-gam r-cran-VGAM r-cran-stringr
 
 # BRASS Bioconductor packages not available via apt-get:
-RUN     wget https://www.bioconductor.org/packages/release/bioc/src/contrib/BiocGenerics_0.16.1.tar.gz \
+RUN     wget -q https://www.bioconductor.org/packages/release/bioc/src/contrib/BiocGenerics_0.16.1.tar.gz \
              https://cran.r-project.org/src/contrib/poweRlaw_0.50.0.tar.gz \
              https://www.bioconductor.org/packages/release/bioc/src/contrib/S4Vectors_0.8.11.tar.gz \
              https://www.bioconductor.org/packages/release/bioc/src/contrib/IRanges_2.4.6.tar.gz \
@@ -94,4 +94,4 @@ RUN     R CMD INSTALL GenomicRanges_1.22.4.tar.gz \
 RUN     curl -sL https://github.com/cancerit/BRASS/archive/v4.0.12.tar.gz | tar xz
 RUN     cd /tmp/downloads/BRASS-4.0.12; ./setup.sh /opt/wtsi-cgp
 
-RUN rm -rf /tmp/downloads
+RUN rm -rf /tmp/downloads /root/.cache/hts-ref
