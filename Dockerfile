@@ -75,3 +75,9 @@ RUN     Rscript /tmp/downloads/bioconductor.R && rm -f /tmp/downloads/bioconduct
 # BRASS
 RUN     curl -sSL https://github.com/cancerit/BRASS/archive/v4.0.12.tar.gz | tar xz && \
         cd /tmp/downloads/BRASS-4.0.12 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
+
+
+## USER CONFIGURATION
+RUN     useradd -ms /bin/bash cgpbox
+USER    newuser
+WORKDIR /home/newuser
