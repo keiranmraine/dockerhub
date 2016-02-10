@@ -69,7 +69,8 @@ RUN     echo 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/
         apt-get clean
 
 # BRASS Bioconductor packages not available via apt-get:
-RUN     Rscript ~/bioconductor.R
+COPY    /tmp/downloads/bioconductor.R
+RUN     Rscript /tmp/downloads/bioconductor.R && rm -f /tmp/downloads/bioconductor.R
 
 # BRASS
 RUN     curl -sL https://github.com/cancerit/BRASS/archive/v4.0.12.tar.gz | tar xz && \
