@@ -18,44 +18,44 @@ RUN     mkdir /tmp/downloads && \
 
 WORKDIR /tmp/downloads
 # PCAP-core
-RUN     curl -sL https://github.com/ICGC-TCGA-PanCancer/PCAP-core/archive/v1.12.1.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/ICGC-TCGA-PanCancer/PCAP-core/archive/v1.12.1.tar.gz | tar xz && \
         cd /tmp/downloads/PCAP-core-1.12.1 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 
 # cgpVcf
-RUN     curl -sL https://github.com/cancerit/cgpVcf/archive/v1.3.1.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/cgpVcf/archive/v1.3.1.tar.gz | tar xz && \
         cd /tmp/downloads/cgpVcf-1.3.1 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # cgpPindel
-RUN     curl -sL https://github.com/cancerit/cgpPindel/archive/v1.5.4.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/cgpPindel/archive/v1.5.4.tar.gz | tar xz && \
         cd /tmp/downloads/cgpPindel-1.5.4 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # alleleCount
-RUN     curl -sL https://github.com/cancerit/alleleCount/archive/v2.1.2.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/alleleCount/archive/v2.1.2.tar.gz | tar xz && \
         cd /tmp/downloads/alleleCount-2.1.2 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # ascatNgs
-RUN     curl -sL https://github.com/cancerit/ascatNgs/archive/v1.5.2.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/ascatNgs/archive/v1.5.2.tar.gz | tar xz && \
         cd /tmp/downloads/ascatNgs-1.5.2 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # cgpCaVEManPostProcessing
-RUN     curl -sL https://github.com/cancerit/cgpCaVEManPostProcessing/archive/v1.4.1.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/cgpCaVEManPostProcessing/archive/v1.4.1.tar.gz | tar xz && \
         cd /tmp/downloads/cgpCaVEManPostProcessing-1.4.1 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # cgpCaVEManWrapper
-RUN     curl -sL https://github.com/cancerit/cgpCaVEManWrapper/archive/1.9.0.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/cgpCaVEManWrapper/archive/1.9.0.tar.gz | tar xz && \
         cd /tmp/downloads/cgpCaVEManWrapper-1.9.0 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm ~/.cache
 
 # VAGrENT
-RUN     curl -sL https://github.com/cancerit/VAGrENT/archive/v2.1.2.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/VAGrENT/archive/v2.1.2.tar.gz | tar xz && \
         cd /tmp/downloads/VAGrENT-2.1.2 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # grass
-RUN     curl -sL https://github.com/cancerit/grass/archive/v1.1.6.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/grass/archive/v1.1.6.tar.gz | tar xz && \
         cd /tmp/downloads/grass-1.1.6 &&./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 # fasta36 dependancy of BRASS
-RUN     curl -sL https://github.com/wrpearson/fasta36/archive/v36.3.8.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/wrpearson/fasta36/archive/v36.3.8.tar.gz | tar xz && \
         cd /tmp/downloads/fasta36-36.3.8/src && make -f ../make/Makefile.linux64 install XDIR=/opt/wtsi-cgp/bin && cd /tmp/downloads && rm -rf *
 
 # BRASS deps
@@ -69,11 +69,11 @@ RUN     echo 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/
         apt-get clean
 
 # BRASS Bioconductor packages not available via apt-get:
-COPY    /tmp/downloads/bioconductor.R
+COPY    /tmp/downloads/bioconductor.R /tmp/downloads/bioconductor.R
 RUN     Rscript /tmp/downloads/bioconductor.R && rm -f /tmp/downloads/bioconductor.R
 
 # BRASS
-RUN     curl -sL https://github.com/cancerit/BRASS/archive/v4.0.12.tar.gz | tar xz && \
+RUN     curl -sSL https://github.com/cancerit/BRASS/archive/v4.0.12.tar.gz | tar xz && \
         cd /tmp/downloads/BRASS-4.0.12 && ./setup.sh /opt/wtsi-cgp && cd /tmp/downloads && rm -rf * && rm -rf ~/.cpanm
 
 RUN     rm -rf /tmp/downloads /root/.cache/hts-ref
