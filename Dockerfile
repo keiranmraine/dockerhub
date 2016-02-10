@@ -9,8 +9,8 @@ LABEL   uk.ac.sanger.cgp="Cancer Genome Project, Wellcome Trust Sanger Institute
 USER    root
 
 RUN     mkdir /tmp/downloads && \
-        apt-get -myq update && \
-        apt-get -myq install build-essential autoconf software-properties-common python-software-properties \
+        apt-get -yqq update && \
+        apt-get -yqq install build-essential autoconf software-properties-common python-software-properties \
           wget curl rsync nano zlib1g-dev libncurses5-dev libgd-dev \
           libgd2-xpm-dev libexpat1-dev python unzip libboost-dev libboost-iostreams-dev \
           libpstreams-dev libglib2.0-dev && \
@@ -62,8 +62,8 @@ RUN     curl -sL https://github.com/wrpearson/fasta36/archive/v36.3.8.tar.gz | t
 RUN     echo 'deb http://cran.rstudio.com/bin/linux/ubuntu trusty/' >> /etc/apt/sources.list && \
         apt-key adv --keyserver keyserver.ubuntu.com --recv-keys E084DAB9 && \
         add-apt-repository -y ppa:marutter/rdev && \
-        apt-get -myq update && \
-        apt-get -myq upgrade && \
+        apt-get -yqq update && \
+        apt-get -yqq upgrade && \
         apt-get -mqy install python unzip libboost-dev libboost-iostreams-dev libpstreams-dev libglib2.0-dev \
           r-base r-base-core r-cran-rcolorbrewer r-cran-gam r-cran-VGAM r-cran-stringr && \
         apt-get clean
